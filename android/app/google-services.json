@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "139565208138",
+    "project_id": "linkup-task",
+    "storage_bucket": "linkup-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139565208138:android:d2a519d929b08c497f8cb3",
+        "android_client_info": {
+          "package_name": "com.example.sky_trecker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139565208138-pr26i8a75eg21d7vptmsapuulper2sra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sky_trecker",
+            "certificate_hash": "2109a7d0ed26de183b98da8dcdcfd71f4e7bb179"
+          }
+        },
+        {
+          "client_id": "139565208138-73ner96508ogh8ffmlkgi6catd3f3sv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAySBcp4UQBK2zFdPc1Df8StvavHZvq1NY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139565208138-73ner96508ogh8ffmlkgi6catd3f3sv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
