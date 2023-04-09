@@ -1,63 +1,57 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+// import 'package:flutter/src/widgets/placeholder.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+// class MyWidget extends StatelessWidget {
+//   //const MyWidget({super.key});
+//   final List _vehicleList = [
+//     {
+//       'vehicleNumber': 'KL-14-V-5208',
+//       'vehicleType': 'Two Wheeler',
+//     },
+//     {
+//       'vehicleNumber': 'KL-13-H-8880',
+//       'vehicleType': 'Four Wheeler',
+//     },
+//     {
+//       'vehicleNumber': 'KL-14-M-6889',
+//       'vehicleType': 'Three Wheeler',
+//     },
+//   ];
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-
-enum Place { road, home, work }
-class _HomePageState extends State<HomePage> {
-  
-  Place? _place;
-  bool _homeFieldVisible = false;
-
-  void handleSelection(Place? value) {
-    setState(() {
-      _place = value;
-      _homeFieldVisible = value == Place.home;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              RadioListTile(
-                title: const Text('on the road'),
-                value: Place.road,
-                groupValue: _place,
-                onChanged: handleSelection,
-              ),
-              RadioListTile(
-                title: const Text('at home'),
-                value: Place.home,
-                groupValue: _place,
-                onChanged: handleSelection,
-              ),
-              if (_homeFieldVisible)
-                const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a search term',
-                  ),
-                ),
-              RadioListTile(
-                title: const Text('at work'),
-                value: Place.work,
-                groupValue: _place,
-                onChanged: handleSelection,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return  Scaffold(
+//       body:  Column(
+//                             children: [
+//                               Padding(
+//                                 padding: const EdgeInsets.all(12.0),
+//                                 child: Text(
+//                                   _vehicleList[index]['vehicleNumber'],
+//                                 ),
+//                               ),
+//                               Padding(
+//                                 padding: const EdgeInsets.all(12.0),
+//                                 child: Text(
+//                                   _vehicleList[index]['vehicleType'],
+//                                 ),
+//                               ),
+//                               GestureDetector(
+//                                 onTap: () {
+//                                   print('Deleted');
+//                                   _vehicleList.removeAt(_vehicleList[index]);
+//                                   print(_vehicleList);
+//                                 },
+//                                 child: const Padding(
+//                                   padding: EdgeInsets.all(12.0),
+//                                   child: Icon(
+//                                     FontAwesomeIcons.timesCircle,
+//                                     color: Colors.redAccent,
+//                                   ),
+//                                 ),
+//                               ),
+//                             ],
+//                           );,
+//     );
+//   }
+// }

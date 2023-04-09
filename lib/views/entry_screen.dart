@@ -9,26 +9,32 @@ class EntryScreen extends StatefulWidget {
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _phoneController = TextEditingController();
 
-enum Value { yes, no }
+enum NewSimValue { yes, no }
 
-Value? _newSim;
-Value? _bLApp;
-Value? _toffeeApp;
-Value? _recharge;
-Value? _gift;
-Value? _value;
+enum BlAppValue { yes, no }
+
+enum ToffeeAppValue { yes, no }
+
+enum DataCellValue { yes, no }
+
+enum RechargeValue { yes, no }
+
+enum GiftValue { yes, no }
+
+NewSimValue? _newSim;
+BlAppValue? _bLApp;
+ToffeeAppValue? _toffeeApp;
+RechargeValue? _recharge;
+GiftValue? _gift;
+DataCellValue? _dataCell;
+bool _dataCellFieldVisible = false;
+bool _rechargeFieldVisible = false;
+bool _giftFieldVisible = false;
 bool _textFieldVisible = false;
+List<String> items = ["One", "Two", "Three"];
+String? dropDownvalue;
 
 class _EntryScreenState extends State<EntryScreen> {
-  // this Function represents
-  void handleSelection(Value? value) {
-    setState(() {
-      _value = value;
-      _textFieldVisible = value == Value.yes;
-    });
-  }
-  ////////////////
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,10 +86,15 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
+                          value: NewSimValue.yes,
                           groupValue: _newSim,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (NewSimValue? value) {
+                            setState(() {
+                              _newSim = value;
+                              //_textFieldVisible = value == Value.yes;
+                            });
+                          },
                         ),
                         const Text("Yes"),
                       ],
@@ -94,10 +105,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
+                          value: NewSimValue.no,
                           groupValue: _newSim,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (NewSimValue? value) {
+                            setState(() {
+                              _newSim = value;
+                            });
+                          },
                         ),
                         const Text("No"),
                       ],
@@ -118,10 +133,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
+                          value: BlAppValue.yes,
                           groupValue: _bLApp,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (BlAppValue? value) {
+                            setState(() {
+                              _bLApp = value;
+                            });
+                          },
                         ),
                         const Text("Yes"),
                       ],
@@ -132,10 +151,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
+                          value: BlAppValue.no,
                           groupValue: _bLApp,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (BlAppValue? value) {
+                            setState(() {
+                              _bLApp = value;
+                            });
+                          },
                         ),
                         const Text("No"),
                       ],
@@ -156,10 +179,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
+                          value: ToffeeAppValue.yes,
                           groupValue: _toffeeApp,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (ToffeeAppValue? value) {
+                            setState(() {
+                              _toffeeApp = value;
+                            });
+                          },
                         ),
                         const Text("Yes"),
                       ],
@@ -170,10 +197,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
+                          value: ToffeeAppValue.no,
                           groupValue: _toffeeApp,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (ToffeeAppValue? value) {
+                            setState(() {
+                              _toffeeApp = value;
+                            });
+                          },
                         ),
                         const Text("No"),
                       ],
@@ -187,18 +218,22 @@ class _EntryScreenState extends State<EntryScreen> {
                 children: [
                   const Expanded(
                     flex: 3,
-                    child: Text("Data Sell"),
+                    child: Text("Data Cell"),
                   ),
                   Expanded(
                     flex: 3,
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
-                          groupValue: _value,
-                          activeColor: Colors.teal,
-                          onChanged: handleSelection,
-                        ),
+                            value: DataCellValue.yes,
+                            groupValue: _dataCell,
+                            activeColor: Colors.teal,
+                            onChanged: (DataCellValue? value) {
+                              setState(() {
+                                _dataCell = value;
+                                _dataCellFieldVisible = value == DataCellValue.yes;
+                              });
+                            }),
                         const Text("Yes"),
                       ],
                     ),
@@ -208,18 +243,21 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
-                          groupValue: _value,
-                          activeColor: Colors.teal,
-                          onChanged: handleSelection,
-                        ),
+                            value: DataCellValue.no,
+                            groupValue: _dataCell,
+                            activeColor: Colors.teal,
+                            onChanged: (DataCellValue? value) {
+                              setState(() {
+                                _dataCell = value;
+                              });
+                            }),
                         const Text("No"),
                       ],
                     ),
                   ),
                 ],
               ),
-              if (_textFieldVisible)
+              if (_dataCell == DataCellValue.yes)
                 const TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -247,11 +285,15 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
-                          groupValue: _recharge,
-                          activeColor: Colors.teal,
-                          onChanged: handleSelection,
-                        ),
+                            value: RechargeValue.yes,
+                            groupValue: _recharge,
+                            activeColor: Colors.teal,
+                            onChanged: (RechargeValue? value) {
+                              setState(() {
+                                _recharge = value;
+                                _rechargeFieldVisible = value == RechargeValue.yes;
+                              });
+                            }),
                         const Text("Yes"),
                       ],
                     ),
@@ -261,10 +303,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
+                          value: RechargeValue.no,
                           groupValue: _recharge,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (RechargeValue? value) {
+                            setState(() {
+                              _recharge = value;
+                            });
+                          },
                         ),
                         const Text("No"),
                       ],
@@ -272,14 +318,15 @@ class _EntryScreenState extends State<EntryScreen> {
                   ),
                 ],
               ),
-              if (_textFieldVisible)
+              if (_recharge == RechargeValue.yes)
                 const TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter a text',
                   ),
                 ),
-              ////////////////////////////////////////////////////////
+
+              // ////////////////////////////////////////////////////////
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -292,10 +339,15 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.yes,
+                          value: GiftValue.yes,
                           groupValue: _gift,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (GiftValue? value) {
+                            setState(() {
+                              _gift = value;
+                              _giftFieldVisible = value == GiftValue.yes;
+                            });
+                          },
                         ),
                         const Text("Yes"),
                       ],
@@ -306,10 +358,14 @@ class _EntryScreenState extends State<EntryScreen> {
                     child: Row(
                       children: [
                         Radio(
-                          value: Value.no,
+                          value: GiftValue.no,
                           groupValue: _gift,
                           activeColor: Colors.teal,
-                          onChanged: handleSelection,
+                          onChanged: (GiftValue? value) {
+                            setState(() {
+                              _gift = value;
+                            });
+                          },
                         ),
                         const Text("No"),
                       ],
@@ -317,11 +373,29 @@ class _EntryScreenState extends State<EntryScreen> {
                   ),
                 ],
               ),
-              if (_textFieldVisible)
-                const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a text',
+              if (_gift == GiftValue.yes)
+                Padding(
+                  padding: const EdgeInsets.only(right: 45.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DropdownButton(
+                        underline: SizedBox.shrink(),
+                        value: dropDownvalue,
+                        hint: const Text("Select Gift"),
+                        items: items.map((String mapValue) {
+                          return DropdownMenuItem<String>(
+                            value: mapValue,
+                            child: Text(mapValue),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            dropDownvalue = value!;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ),
 

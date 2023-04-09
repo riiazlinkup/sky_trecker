@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DataListScreen extends StatefulWidget {
@@ -7,6 +8,7 @@ class DataListScreen extends StatefulWidget {
 
 class _DataListScreenState extends State<DataListScreen> {
   //const DataListScreen({super.key});
+  //<Map<String, dynamic>>
   List<Map<String, dynamic>> datas = [
     {"name": "John", "phone": "01748569102", "location": "USA"},
     {"name": "Jane", "phone": "01748569102", "location": "Canada"},
@@ -31,7 +33,7 @@ class _DataListScreenState extends State<DataListScreen> {
     {"name": "Mark", "phone": "01748569102", "location": "Australia"},
     {"name": "Emily", "phone": "01748569102", "location": "UK"},
     {"name": "Lily", "phone": "01748469102", "location": "BD"},
-    {"name": "mily", "phone": "01748569102", "location": "Egypt"}
+    {"name": "mily", "phone": "01748569102", "location": "Egypt"},
   ];
 
   @override
@@ -71,7 +73,7 @@ class _DataListScreenState extends State<DataListScreen> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    //  datas.single.remove(data.clear());
+                                    datas.remove(data);
                                   });
                                 },
                                 icon: const Icon(Icons.delete),

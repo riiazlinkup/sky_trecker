@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sky_trecker/business_logics/auth.dart';
 import 'package:sky_trecker/widget/button.dart';
 
 class ResetPassword extends StatelessWidget {
@@ -32,7 +33,15 @@ class ResetPassword extends StatelessWidget {
                 ),
               ),
               const Divider(color: Colors.transparent),
-              PurpleButton("Rest Now", () => null),
+              PurpleButton("Rest Now", () {
+                if (_emailController.text.isNotEmpty) {
+                  Auth.resetPassword(
+                    _emailController.text,
+                    context,
+                  );
+                }
+                _emailController.clear();
+              }),
             ],
           ),
         ),

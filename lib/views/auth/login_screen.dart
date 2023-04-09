@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sky_trecker/business_logics/auth.dart';
 import 'package:sky_trecker/views/auth/signup_screen.dart';
 import 'package:sky_trecker/widget/button.dart';
@@ -19,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool _isVisible = true;
+  bool _isProgress = true;
 
   @override
   Widget build(BuildContext context) {
@@ -95,14 +97,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Divider(color: Colors.transparent),
                 // Button is here
-                PurpleButton(
-                  "Log in",
-                  () => Auth.login(
-                    _emailController.text,
-                    _emailController.text,
-                    context,
-                  ),
-                ),
+                // if (_isProgress)
+                //   const Center(
+                //     child: CircularProgressIndicator(),
+                //   ),
+                _isProgress == false
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : PurpleButton(
+                        "Log in",
+                        () {
+                          try {
+                            setState(() {
+                              _isProgress = true;
+                            });
+                            Auth.login(
+                              _emailController.text,
+                              _emailController.text,
+                              context,
+                            );
+                            setState(() {
+                              _isProgress = false;
+                            });
+                          } catch (e) {
+                            print(e);
+                          } finally {
+                            setState(() {
+                              _isProgress = true;
+                            });
+                          }
+                        },
+                      ),
+
                 const Divider(color: Colors.transparent),
                 Text.rich(
                   TextSpan(text: 'Don\'t have an account? ', children: [

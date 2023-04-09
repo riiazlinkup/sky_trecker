@@ -98,33 +98,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     : PurpleButton(
                         "Sign Up",
                         () {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              _isProgress = true;
-                            });
-                            Auth.signUp(
-                              _emailController.text,
-                              _passwordController.text,
-                              context,
-                            );
-                            setState(() {
-                              _isProgress = false;
-                            });
-                            Fluttertoast.showToast(msg: "SignUp Succuess");
-                          } else {
-                            Fluttertoast.showToast(msg: "SignUp Failed");
+                          try {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                _isProgress = true;
+                              });
+                              Auth.signUp(
+                                _emailController.text,
+                                _passwordController.text,
+                                context,
+                              );
+                              setState(() {
+                                _isProgress = false;
+                              });
+                            } else {
+                              Fluttertoast.showToast(msg: "Signup Failed");
+                            }
+                          } catch (e) {
+                            print(e);
                           }
                         },
                       ),
 
-                const Divider(height: 20.0,
-                color: Colors.transparent),
+                const Divider(height: 20.0, color: Colors.transparent),
                 Text.rich(
-                  TextSpan(text: "Already have an account? ", children: [
+                  TextSpan(text: "Already have an account? ", children: <InlineSpan>[
                     TextSpan(
                         text: "Login",
                         style: const TextStyle(
-                          fontSize: 20,
+                          //  fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Colors.blue,
                         ),

@@ -38,7 +38,7 @@ class Auth {
   ///
   static Future login(String emailAddress, String password, context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress.toString(),
         password: password.toString(),
       );
@@ -60,6 +60,14 @@ class Auth {
         print('Wrong password provided for that user.');
         Fluttertoast.showToast(msg: "Wrong password provided for that user.");
       }
+    }
+  }
+
+  static resetPassword(String email, BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.toString());
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
     }
   }
 }

@@ -1,10 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sky_trecker/views/auth/signup_screen.dart';
-import 'package:sky_trecker/views/random.dart';
-
-import 'views/deshboard_screen.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  DeshBoardScreen(),
+      home: SignUpScreen(),
     );
   }
 }
