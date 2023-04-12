@@ -108,25 +108,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     : PurpleButton(
                         "Log in",
                         () {
-                          try {
-                            setState(() {
-                              _isProgress = true;
-                            });
-                            Auth.login(
-                              _emailController.text,
-                              _emailController.text,
-                              context,
-                            );
-                            setState(() {
-                              _isProgress = false;
-                            });
-                          } catch (e) {
-                            print(e);
-                          } finally {
-                            setState(() {
-                              _isProgress = true;
-                            });
-                          }
+                          //  try {
+                          //     setState(() {
+                          //       _isProgress = true;
+                          //     });
+                          //     // Auth.login(
+                          //     //   _emailController.text,
+                          //     //   _emailController.text,
+                          //     //   context,
+                          //     // );
+                          //     setState(() {
+                          //       _isProgress = false;
+                          //     });
+                          //   } catch (e) {
+                          //     print(e);
+                          //   } finally {
+                          //     setState(() {
+                          //       _isProgress = true;
+                          //     });
+                          //   }
                         },
                       ),
 

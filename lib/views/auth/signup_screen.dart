@@ -98,25 +98,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     : PurpleButton(
                         "Sign Up",
                         () {
-                          try {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                _isProgress = true;
-                              });
-                              Auth.signUp(
-                                _emailController.text,
-                                _passwordController.text,
-                                context,
-                              );
-                              setState(() {
-                                _isProgress = false;
-                              });
-                            } else {
-                              Fluttertoast.showToast(msg: "Signup Failed");
-                            }
-                          } catch (e) {
-                            print(e);
-                          }
+                          // try {
+                          //   if (_formKey.currentState!.validate()) {
+                          //     setState(() {
+                          //       _isProgress = true;
+                          //     });
+                          //     Auth.signUp(
+                          //       _emailController.text,
+                          //       _passwordController.text,
+                          //       context,
+                          //     );
+                          //     setState(() {
+                          //       _isProgress = false;
+                          //     });
+                          //   } else {
+                          //     Fluttertoast.showToast(msg: "Signup Failed");
+                          //   }
+                          // } catch (e) {
+                          //   print(e);
+                          // }
                         },
                       ),
 

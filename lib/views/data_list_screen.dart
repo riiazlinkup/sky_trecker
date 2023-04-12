@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DataListScreen extends StatefulWidget {
@@ -7,8 +6,6 @@ class DataListScreen extends StatefulWidget {
 }
 
 class _DataListScreenState extends State<DataListScreen> {
-  //const DataListScreen({super.key});
-  //<Map<String, dynamic>>
   List<Map<String, dynamic>> datas = [
     {"name": "John", "phone": "01748569102", "location": "USA"},
     {"name": "Jane", "phone": "01748569102", "location": "Canada"},
@@ -40,7 +37,8 @@ class _DataListScreenState extends State<DataListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SingleChildScrollView(
+        child: 
+        SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -86,6 +84,7 @@ class _DataListScreenState extends State<DataListScreen> {
             ),
           ),
         ),
+     
       ),
     );
   }

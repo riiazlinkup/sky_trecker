@@ -33,15 +33,7 @@ class ResetPassword extends StatelessWidget {
                 ),
               ),
               const Divider(color: Colors.transparent),
-              PurpleButton("Rest Now", () {
-                if (_emailController.text.isNotEmpty) {
-                  Auth.resetPassword(
-                    _emailController.text,
-                    context,
-                  );
-                }
-                _emailController.clear();
-              }),
+              PurpleButton("Rest Now", () {}),
             ],
           ),
         ),
