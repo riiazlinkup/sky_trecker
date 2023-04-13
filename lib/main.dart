@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/data_list.dart';
+import 'package:sky_trecker/views/random.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: DataListPage(),
+      home: LocationPage(),
     );
   }
 }

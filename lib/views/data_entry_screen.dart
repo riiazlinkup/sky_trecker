@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:sky_trecker/views/otp_screen.dart';
 import 'package:sky_trecker/widget/button.dart';
-
-import '../helper/api_save_data.dart';
 import '../widget/gap_height.dart';
 
-class EntryScreen extends StatefulWidget {
+class DataEntryScreen extends StatefulWidget {
+//  DataEntryScreen({required this.position, super.key});
+//   Position? position;
   @override
-  State<EntryScreen> createState() => _EntryScreenState();
+  State<DataEntryScreen> createState() => _DataEntryScreenState();
 }
 
 final TextEditingController _nameController = TextEditingController();
@@ -61,7 +62,7 @@ QuestionAns? thirdQuestionAns;
 QuestionAns? fourthQuestionAns;
 SixthQuestionAns? sixthQuestionAns;
 
-class _EntryScreenState extends State<EntryScreen> {
+class _DataEntryScreenState extends State<DataEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -70,6 +71,11 @@ class _EntryScreenState extends State<EntryScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Data Entry"),
+          centerTitle: true,
+          // automaticallyImplyLeading: false,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -520,7 +526,33 @@ class _EntryScreenState extends State<EntryScreen> {
                     ),
                   ],
                 ),
-                gapHeight(height: 10.0),
+                // gapHeight(height: 10.0),
+                // This Row is Location
+                Row(
+                  children: [
+                    const Expanded(
+                      flex: 6,
+                      child: Text("Location"),
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height / 20,
+                        child: TextField(
+                          controller: _phoneController,
+                          // keyboardType: TextInputType.phone,
+                          decoration: const InputDecoration(
+                            hintText: "Sadman",
+                            hintStyle: TextStyle(color: Colors.black26),
+                            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
                 // This Column 1st Question ?
                 gapHeight(height: 10.0),
                 Column(
@@ -1061,6 +1093,7 @@ class _EntryScreenState extends State<EntryScreen> {
                     );
                   },
                 ),
+                gapHeight(height: 20.0),
               ],
             ),
           ),

@@ -1,72 +1,121 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sky_trecker/views/data_list_screen.dart';
-import 'package:sky_trecker/views/entry_screen.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:sky_trecker/views/random.dart';
+import 'package:sky_trecker/widget/deshboard.dart';
+import 'package:sky_trecker/widget/gap_height.dart';
+import 'data_list_screen.dart';
+import 'data_entry_screen.dart';
 
-class DeshBoardScreen extends StatelessWidget {
+class DeshBoardScreen extends StatefulWidget {
   const DeshBoardScreen({super.key});
 
   @override
+  State<DeshBoardScreen> createState() => _DeshBoardScreenState();
+}
+
+class _DeshBoardScreenState extends State<DeshBoardScreen> {
+  Position? position;
+  String stAddress = "";
+  String stAdd = "";
+  void setAddress() async {
+    List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
+    List<Placemark> placemarks = await placemarkFromCoordinates(52.2165157, 6.9437819);
+    setState(() {
+      stAddress = "${locations.last.longitude}${locations.last.latitude}";
+      stAdd = "${placemarks.reversed.last.country}${placemarks.reversed.last.locality}${placemarks.reversed.last.subAdministrativeArea}";
+    });
+  }
+
+  void getUserLocation() async {
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+    position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print("Latitude & Longitude ===>>>>>>> $position");
+  }
+
+  @override
+  void initState() {
+    getUserLocation();
+    setAddress();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120.0),
-          child: AppBar(
-            backgroundColor: Color.fromARGB(255, 125, 122, 255),
-            automaticallyImplyLeading: false,
-            title: const Text(
-              "Desh Board",
-            ),
-            centerTitle: true,
-            elevation: 0,
-            bottom: TabBar(
-              indicatorColor: Colors.black,
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 15),
-              unselectedLabelColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.teal,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Desh Board"),
+        centerTitle: true,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DeshBoard(
+                title: "Data Entry",
+                icon: Icons.receipt_long_outlined,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (_) => DataEntryScreen(
+                          // position: position,
+                          ),
+                    ),
+                  );
+                },
               ),
-              tabs: [
-                Tab(
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.white, width: 1),
-                    ),
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text("Entry"),
-                    ),
+              const SizedBox(width: 10.0),
+              DeshBoard(
+                title: "Data List",
+                icon: Icons.list_alt_outlined,
+                onTap: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (_) => DataListScreen(),
                   ),
                 ),
-                Tab(
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.white, width: 1),
-                    ),
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text("Data List"),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            EntryScreen(),
-            DataListScreen(),
-          ],
-        ),
+          gapHeight(height: 10.0),
+          Expanded(
+            child: SizedBox(
+                height: MediaQuery.of(context).size.height / 20,
+                child: Column(
+                  children: [
+                    Text(
+                      position == null ? "Location is Empty" : position.toString(),
+                    ),
+                    gapHeight(height: 20.0),
+                    Text(
+                      stAddress == null ? "Location is not set" : stAddress.toString(),
+                    ),
+                    gapHeight(height: 20.0),
+                    Text(
+                      stAdd == null ? "Location is not sets" : stAdd.toString(),
+                    ),
+                  ],
+                )
+                // TextField(
+                //   controller: _phoneController,
+                //   // keyboardType: TextInputType.phone,
+                //   decoration: const InputDecoration(
+                //     // hintText: "Sadman",
+                //     hintStyle: TextStyle(color: Colors.black26),
+                //     contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                //     border: OutlineInputBorder(),
+                //   ),
+                // ),
+                ),
+          ),
+        ],
       ),
     );
   }
